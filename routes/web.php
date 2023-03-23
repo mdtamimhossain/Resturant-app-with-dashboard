@@ -34,11 +34,10 @@ Route::get('/registration',[AuthController::class,'registration'])->name('regist
 Route::post('/registration', [AuthController::class, 'processRegistration'])->name('register.process');
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
-
-
-Route::get('/dashboard/food',[DashboardController::class,'dashboardFood'])->name('dashboard.food');
 Route::get('/dashboard/reservation',[DashboardController::class,'dashboardReservation'])->name('dashboard.reservation');
 Route::get('/dashboard/user',[DashboardController::class,'dashboardUser'])->name('dashboard.user');
 //Route::get('/dashboard/userList',[DashboardController::class,'userList'])->name('dashboard.userList');
-Route::post('/dashboard/delete/{id}', [DashboardController::class, 'deleteReservation'])->name('deleteReservation');
+Route::post('/dashboard/delete/{id}', [DashboardController::class, 'deleteReservation'])->name('dashboard.deleteReservation');
 
+Route::get('/dashboard/food', [DashboardController::class, 'foodList'])->name('dashboard.foodList');
+Route::post('/upload', [DashboardController::class, 'foodUpload'])->name('dashboard.foodUpload');

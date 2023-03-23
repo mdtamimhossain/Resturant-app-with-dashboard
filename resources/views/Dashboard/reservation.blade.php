@@ -26,7 +26,7 @@
                             <td>{{$reservation->guestNumber}}</td>
                             <td>{{$reservation->date}}</td>
                             <td>{{$reservation->message}}</td>
-                            <form action="{{route('deleteReservation',$reservation->id)}}" method="POST">
+                            <form action="{{route('dashboard.deleteReservation',$reservation->id)}}" method="POST">
                                 @csrf
                                 <td><button type="submit" class=" btn-info submit-btn" >Complete</button></td>
                             </form>

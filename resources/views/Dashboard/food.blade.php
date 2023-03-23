@@ -1,28 +1,58 @@
 @extends('layouts.dashboard')
 @section('content')
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 <div id="food" class="section">
     <h3>Add a new dish</h3>
-    <form action="submit_food.php" method="post" enctype="multipart/form-data" class="food-form">
+    <form method="POST" action="{{route('dashboard.foodUpload')}}" enctype="multipart/form-data" class="food-form">
+        @csrf
         <div class="form-group">
             <label for="dish_name">Dish Name:</label>
-            <input type="text" name="dish_name" id="dish_name" required>
+            <input type="text" name="name" id="dish_name" required>
+            @error('name')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="description">Description:</label>
             <input type="text" name="description" id="description" required>
+            @error('description')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="price">Price:</label>
             <input type="number" name="price" id="price" required step=".01" min="0">
+            @error('price')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
-            <label for="food type">Food Type:</label>
-            <input type="text" name="food_type" id="food_type" required>
+            <fieldset>
+                <select value="type" name="type" id="type">
+                    <option value="number-guests">Type</option>
+                    <option name="PIZZA" id="PIZZA">PIZZA</option>
+                    <option name="SALAD" id="SALAD">SALAD</option>
+                    <option name="NOODLE" id="NOODLE">NOODLE</option>
+                </select>
+                @error('type')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </fieldset>
         </div>
         <div class="form-group">
-            <label for="photo">Photo:</label>
-            <input type="file" name="photo" id="photo" required accept="image/*">
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image" required accept="image/*">
+            @error('type')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
         <button type="submit" class=" btn-info submit-btn">Add Dish</button>
     </form>
@@ -36,24 +66,17 @@
             <th>Description</th>
             <th>Price</th>
             <th>type</th>
-            <th>Photo</th>
         </tr>
         </thead>
         <tbody>
+        @foreach($foods as $food)
         <tr>
-            <td>Spaghetti Carbonara</td>
-            <td>Pasta dish with bacon, eggs, and cheese</td>
-            <td>$12.99</td>
-            <td>PIZZA</td>
-            <td><img src="https://www.example.com/spaghetti_carbonara.jpg" alt="Spaghetti Carbonara"></td>
+            <td>{{$food->name}}</td>
+            <td>{{$food->description}}</td>
+            <td>{{$food->price}}</td>
+            <td>{{$food->type}}</td>
         </tr>
-        <tr>
-            <td>Chicken Tikka Masala</td>
-            <td>Indian chicken dish in a spiced tomato-based sauce</td>
-            <td>$14.99</td>
-            <td>PIZZA</td>
-            <td><img src="https://www.example.com/chicken_tikka_masala.jpg" alt="Chicken Tikka Masala"></td>
-        </tr>
+        @endforeach
         <!-- Add more rows here for additional dishes -->
         </tbody>
     </table>

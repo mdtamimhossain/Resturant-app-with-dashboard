@@ -3,10 +3,13 @@
 namespace App\Http\Services;
 
 use App\Jobs\SendEmailJob;
+use App\Models\Food;
 use App\Models\Reserve;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class DashboardService extends Service
 {
@@ -30,6 +33,37 @@ public function deleteReservation($id): array
         return ['success' => false,'message' => $exception->getMessage()];
     }
 }
+    public function foodUpload($data): array
+    {
+        try {
+
+            $imagePath = $data['image']->store('public/food_images');
+            $imageUrl = Storage::url($imagePath);
+            Food::create([
+                'name'=>$data['name'],
+                'description'=>$data['price'],
+                'price'=>$data['price'],
+                'type'=>$data['type'],
+                'image'=>$imageUrl
+            ]);
+            return ['success' => true,'message' => "Food upload successfully"];
+        }catch (\Exception $exception){
+            return ['success' => false,'message' => $exception->getMessage()];
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function foodList(): array
+    {
+        try {
+            $food=Food::all();
+            return ['success' => true,'data'=>$food];
+        }catch (\Exception $exception){
+            return ['success' => false,'message' => $exception->getMessage()];
+        }
+    }
 
 
 }

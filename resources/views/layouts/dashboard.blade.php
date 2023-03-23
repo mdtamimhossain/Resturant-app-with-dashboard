@@ -111,13 +111,14 @@
     <ul>
         <div class="sidebar_cap">
             <li><a href="{{route('dashboard.user')}}">Users</a></li>
-            <li class=""><a href="{{route('dashboard.food')}}">Food</a></li>
+            <li class=""><a href="{{route('dashboard.foodList')}}">Food</a></li>
             <li><a href="{{route('dashboard.reservation')}}">Reservations</a></li>
             <li><a href="#chefs">Chefs</a></li>
         </div>
     </ul>
 </div>
 <div class="main">
+    @include('layouts.alert')
     @yield('content','No Content available')
 </div>
 </body>

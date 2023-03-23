@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\Dashboard\FoodRequest;
 use App\Http\Services\DashboardService;
+use App\Models\Food;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 
 class DashboardController extends Controller
@@ -57,4 +61,30 @@ class DashboardController extends Controller
     }
 
 
+    /**
+     * @return Application|Factory|View|\Illuminate\Foundation\Application|RedirectResponse
+     */
+    public function foodList()
+    {
+        $response = $this->service->foodList();
+        return $response['success'] ?
+            view('/Dashboard/food')->with('foods', $response['data'])
+            : redirect()->back()->with('error', $response['message']);
+    }
+
+    /**
+     * @param FoodRequest $request
+     * @return RedirectResponse
+     */
+    public function foodUpload(FoodRequest $request): RedirectResponse
+    {
+
+        $response = $this->service->foodUpload($request->all());
+        return $response['success'] ?
+            redirect()->route('dashboard.foodList')->with('success', $response['message'])
+            : redirect()->back()->with('error', $response['message']);
+        }
+
+
 }
+
