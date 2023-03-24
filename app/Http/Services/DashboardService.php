@@ -41,7 +41,7 @@ public function deleteReservation($id): array
             $imageUrl = Storage::url($imagePath);
             Food::create([
                 'name'=>$data['name'],
-                'description'=>$data['price'],
+                'description'=>$data['description'],
                 'price'=>$data['price'],
                 'type'=>$data['type'],
                 'image'=>$imageUrl

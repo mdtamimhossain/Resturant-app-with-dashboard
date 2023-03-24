@@ -1,5 +1,55 @@
 @extends('layouts.app')
 @section('content')
+    <style>
+        .tm-gallery-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -10px;
+        }
+        button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+
+        button:active {
+            background-color: #1e5229;
+        }
+
+        .tm-gallery-item {
+            flex: 1 0 25%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 992px) {
+            .tm-gallery-item {
+                flex-basis: 33.33%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tm-gallery-item {
+                flex-basis: 50%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tm-gallery-item {
+                flex-basis: 100%;
+            }
+        }</style>
     <header class="row tm-welcome-section">
         <h2 class="col-12 text-center tm-section-title">Welcome to Simple House</h2>
         <p class="col-12 text-center">Total 3 HTML pages are included in this template. Header image has a parallax effect. You can feel free to download, edit and use this TemplateMo layout for your commercial or non-commercial websites.</p>
@@ -10,33 +60,33 @@
 
             <ul>
                 @foreach($types as $type)
-                    <li class="tm-paging-item"><a href="{{route('home',$type)}}" >{{$type}}</a></li>
+                    <li class="tm-paging-item">
+                        <a href="{{route('home',$type)}}">{{$type}}</a>
+
+                    </li>
                 @endforeach
 
             </ul>
         </nav>
     </div>
 
+
     <!-- Gallery -->
     <div class="row tm-gallery">
-        @foreach($foods as $food)
 
-        <div id="tm-gallery-page-{{strtolower($food->type)}}" class="tm-gallery-page">
-            <a href="" style="color:black;">
-                <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                    <figure>
-                        <img src="{{$food->image}}" alt="Image" class="img-fluid tm-gallery-img" />
-                        <figcaption>
-                            <h4 class="tm-gallery-title">{{$food->name}}</h4>
-                            <p class="tm-gallery-description">{{$food->description}}</p>
-                            <p class="tm-gallery-price">{{$food->price}}</p>
-                        </figcaption>
-                    </figure>
-                </article>
-            </a>
+        <div id="tm-gallery-page-pizza" class="tm-gallery-page">
+            @foreach($foods as $food)
+                <div class="tm-gallery-item">
+                    <a href="#" style="text-decoration: none; cursor: pointer;">
+                        <img src="{{ asset('storage/public/food_images/' . basename($food->image)) }}" alt="Image" class="img-fluid tm-gallery-img"/>
+                        <h4 class="tm-gallery-title">{{$food->name}}</h4>
+                        <p class="tm-gallery-description">{{$food->description}}</p>
+                        <p class="tm-gallery-price">{{$food->price}}$</p>
+                    </a>
+                    <button style="margin-top: 10px;">Order</button>
+                </div>
+            @endforeach
         </div>
-        @endforeach
-
 
     </div>
     <div class="tm-section tm-container-inner">

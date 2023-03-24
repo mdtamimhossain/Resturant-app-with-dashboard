@@ -35,12 +35,12 @@ https://templatemo.com/tm-539-simple-house
                     <nav class="col-md-6 col-12 tm-nav">
                         <ul class="tm-nav-ul">
                             @if(auth()->check())
-                            <li class="tm-nav-li"><a href="{{route('home','PIZZA')}}" class="tm-nav-link">Home</a></li>
+                            <li class="tm-nav-li"><a href="{{route('base',null)}}" class="tm-nav-link">Home</a></li>
                             <li class="tm-nav-li"><a href="{{route('about')}}" class="tm-nav-link">About</a></li>
                             <li class="tm-nav-li"><a href="{{route('reservation')}}" class="tm-nav-link">Reservation</a></li>
                             <li class="tm-nav-li"><a href="{{route('logout')}}" class="tm-nav-link">Logout</a></li>
                             @else
-                                <li class="tm-nav-li"><a href="{{route('home','PIZZA')}}" class="tm-nav-link ">Home</a></li>
+                                <li class="tm-nav-li"><a href="{{route('base',null)}}" class="tm-nav-link ">Home</a></li>
                                 <li class="tm-nav-li"><a href="{{route('about')}}" class="tm-nav-link">About</a></li>
                                 <li class="tm-nav-li"><a href="{{route('reservation')}}" class="tm-nav-link">Reservation</a></li>
                                 <li class="tm-nav-li"><a href="{{route('login')}}" class="tm-nav-link">Login</a></li>
