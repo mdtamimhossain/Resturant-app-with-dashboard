@@ -17,15 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('page/home');
-});
+Route::get('/', [HomeController::class,'index']);
 Route::middleware('auth')->group(function (){
 
 });
+
+Route::get('/{type}',[HomeController::class,'index'])->name('home');
+
+
 Route::post('/reserve',[ReservationController::class,'ReservationProcess'])->name('reserve.process');
 Route::get('/reservation',[ReservationController::class,'reservation'])->name('reservation');
-Route::get('/home',[HomeController::class,'index'])->name('home');
+
 Route::get('/about',[HomeController::class,'about'])->name('about');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/login',[AuthController::class,'login'])->name('login');

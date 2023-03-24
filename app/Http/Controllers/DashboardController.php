@@ -19,12 +19,6 @@ class DashboardController extends Controller
     {
         $this->service = $service;
     }
-    /**
-     * @return Application|Factory|View|\Illuminate\Foundation\Application
-     */
-    public function dashboardFood(){
-        return view('/Dashboard/food');
-    }
 
     /**
      * @return Application|Factory|View|\Illuminate\Foundation\Application
