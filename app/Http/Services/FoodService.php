@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use function Webmozart\Assert\Tests\StaticAnalysis\inArray;
 
-class PageService extends Service
+class FoodService extends Service
 {
 
     /**
@@ -44,7 +44,33 @@ class PageService extends Service
             return $this->responseError($exception->getMessage());
         }
     }
+    public function getAllFood(): array
+    {
+        try {
 
+            $foods=Food::all();
+            $types=Food::distinct()->pluck('type')->toArray();
+
+            /*$newAr=[];
+            foreach($types as $type)
+            {
+                $newAr[]=$type['type'];
+            }
+            $types=$newAr;
+            dd($types);
+           /* dump($types);
+            foreach($types as $key=> $type)
+            {
+                $types[$key]=$type['type'];
+            }*/
+
+
+            return $this->responseSuccess('Done',['types'=>$types,'foods'=>$foods]);
+        }
+        catch (\Exception $exception) {
+            return $this->responseError($exception->getMessage());
+        }
+    }
 
 
 }

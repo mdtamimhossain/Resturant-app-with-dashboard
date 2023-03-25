@@ -16,16 +16,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/test',function (){
-    return view('page/test');
-} );
 
-Route::get('/', [HomeController::class,'index'])->name('base');
+
 Route::middleware('auth')->group(function (){
 
 });
-
-Route::get('/{type}',[HomeController::class,'index'])->name('home');
+Route::get('/', [HomeController::class,'index'])->name('base');
+Route::get('/food/{type}',[HomeController::class,'index'])->name('home');
 
 
 Route::post('/reserve',[ReservationController::class,'ReservationProcess'])->name('reserve.process');

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Simple House</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
-    <link href="css/templatemo-style.css" rel="stylesheet" />
+    <link href="/css/templatemo-style.css" rel="stylesheet" />
 </head>
 <!--
 
@@ -22,11 +22,11 @@ https://templatemo.com/tm-539-simple-house
     <!-- Top box -->
     <!-- Logo & Site Name -->
     <div class="placeholder">
-        <div class="parallax-window" data-parallax="scroll" data-image-src="img/simple-house-01.jpg">
+        <div class="parallax-window" data-parallax="scroll" data-image-src="/img/simple-house-01.jpg">
             <div class="tm-header">
                 <div class="row tm-header-inner">
                     <div class="col-md-6 col-12">
-                        <img src="img/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
+                        <img src="/img/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
                         <div class="tm-site-text-box">
                             <h1 class="tm-site-title">Simple House</h1>
 
