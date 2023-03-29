@@ -618,7 +618,7 @@ p, address {
 
 @media (min-width: 768px) {
  .tm-history-text {
-    max-width: auto;
+
     margin: 0 auto 0 35px;
   }
 }

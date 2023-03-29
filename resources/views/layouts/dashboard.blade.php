@@ -113,7 +113,7 @@
             <li><a href="{{route('dashboard.user')}}">Users</a></li>
             <li class=""><a href="{{route('dashboard.foodList')}}">Food</a></li>
             <li><a href="{{route('dashboard.reservation')}}">Reservations</a></li>
-            <li><a href="#chefs">Chefs</a></li>
+            <li><a href="{{route('dashboard.order')}}">Orders</a></li>
         </div>
     </ul>
 </div>

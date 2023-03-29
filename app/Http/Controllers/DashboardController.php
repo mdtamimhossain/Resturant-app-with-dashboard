@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Dashboard\FoodRequest;
 use App\Http\Services\DashboardService;
 use App\Models\Food;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -15,21 +16,11 @@ use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
-    public function __construct(DashboardService $service)
-    {
-        $this->service = $service;
-    }
 
     /**
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
-    public function dashboardReservation(){
-        $response = $this->service->ReservationList();
-        $reservations=$response['data'];
-        return $response['success'] ?
-            view('/Dashboard/reservation')->with('reservations',$reservations)
-            : view('/Dashboard/reservation')->with('error', $response['message']);
-    }
+
 
     /**
      * @return Application|Factory|View|\Illuminate\Foundation\Application
@@ -42,42 +33,14 @@ class DashboardController extends Controller
 
     /**
      * @param $id
-     * @return RedirectResponse
+     * @return Application|Factory|\Illuminate\Foundation\Application|View
      */
-    public function deleteReservation($id): RedirectResponse
-    {
-        $response = $this->service->deleteReservation($id);
-
-
-        return $response['success'] ?
-            redirect()->route('dashboard.reservation')->with('success', $response['message'])
-            : redirect()->back()->with('error', $response['message']);
+    public function dashboardOrder(){
+        $orders=Order::all();
+        // return view('Dashboard.user')->with('users',$users);
+        return view('/Dashboard/order')->with('orders',$orders);
     }
 
-
-    /**
-     * @return Application|Factory|View|\Illuminate\Foundation\Application|RedirectResponse
-     */
-    public function foodList()
-    {
-        $response = $this->service->foodList();
-        return $response['success'] ?
-            view('/Dashboard/food')->with('foods', $response['data'])
-            : redirect()->back()->with('error', $response['message']);
-    }
-
-    /**
-     * @param FoodRequest $request
-     * @return RedirectResponse
-     */
-    public function foodUpload(FoodRequest $request): RedirectResponse
-    {
-
-        $response = $this->service->foodUpload($request->all());
-        return $response['success'] ?
-            redirect()->route('dashboard.foodList')->with('success', $response['message'])
-            : redirect()->back()->with('error', $response['message']);
-        }
 
 
 }

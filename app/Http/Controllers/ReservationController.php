@@ -38,6 +38,23 @@ class ReservationController extends Controller
             redirect()->route('home')->with('success', $response['message'])
             : redirect()->back()->with('error', $response['message']);
     }
+    public function dashboardReservation(){
+        $response = $this->service->ReservationList();
+        $reservations=$response['data'];
+        return $response['success'] ?
+            view('/Dashboard/reservation')->with('reservations',$reservations)
+            : view('/Dashboard/reservation')->with('error', $response['message']);
+    }
+    public function deleteReservation($id): RedirectResponse
+    {
+        $response = $this->service->deleteReservation($id);
+
+
+        return $response['success'] ?
+            redirect()->route('dashboard.reservation')->with('success', $response['message'])
+            : redirect()->back()->with('error', $response['message']);
+    }
+
 
 
 }
