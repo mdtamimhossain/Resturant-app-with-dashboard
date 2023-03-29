@@ -51,7 +51,7 @@ class AuthController extends Controller
         $response = $this->service->processLogin($request->all());
 
         return $response['success'] ?
-            redirect()->route('home')->with('success', $response['message'])
+            redirect()->route('base')->with('success', $response['message'])
             : redirect()->back()->with('error', $response['message']);
     }
     /**

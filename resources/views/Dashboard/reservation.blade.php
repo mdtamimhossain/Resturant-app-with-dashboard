@@ -14,6 +14,7 @@
                             <th>Number of Guests</th>
                             <th>Date</th>
                             <th>Message</th>
+                            <th>Confirmation</th>
                             <th>Uncompleted</th>
                         </tr>
                         </thead>
@@ -26,6 +27,15 @@
                             <td>{{$reservation->guestNumber}}</td>
                             <td>{{$reservation->date}}</td>
                             <td>{{$reservation->message}}</td>
+                            @if($reservation->confirmation==true)
+                                    <td><span>Confirmed</span></td>
+                            @endif
+                            @if($reservation->confirmation!=true)
+                                <form action="{{route('dashboard.confirmReservation',$reservation->id)}}" method="POST">
+                                    @csrf
+                                    <td><button type="submit" class=" btn-info submit-btn" >Confirm</button></td>
+                                </form>
+                            @endif
                             <form action="{{route('dashboard.deleteReservation',$reservation->id)}}" method="POST">
                                 @csrf
                                 <td><button type="submit" class=" btn-info submit-btn" >Complete</button></td>

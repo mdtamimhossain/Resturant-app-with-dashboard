@@ -23,7 +23,8 @@ class Reserve extends Model
         'phone',
         'guestNumber',
         'date',
-        'message'
+        'message',
+        'confirmation'
     ];
 
 }

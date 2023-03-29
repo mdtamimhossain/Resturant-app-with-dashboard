@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Jobs\SendEmailJob;
+use App\Models\Order;
 use App\Models\Reserve;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -33,6 +34,20 @@ public function ReservationProcess(array $data):array
         try {
             $data=Reserve::all();
             return ['success' => true,'data'=>$data];
+        }catch (\Exception $exception){
+            return ['success' => false,'message' => $exception->getMessage()];
+        }
+    }
+    public function confirmReservation($id): array
+    {
+        try {
+            $confirmation=Reserve::find($id);
+            $sendEmailJob = new SendEmailJob($confirmation->email,$confirmation->date);
+            dispatch($sendEmailJob);
+            $confirmation['confirmation']=true;
+            $confirmation->update();
+
+            return ['success' => true,'message' => "Mail sendSuccessfully"];
         }catch (\Exception $exception){
             return ['success' => false,'message' => $exception->getMessage()];
         }

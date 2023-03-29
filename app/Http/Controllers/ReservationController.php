@@ -6,11 +6,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\page\ReservationRequest;
 
 use App\Http\Services\ReservationService;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
@@ -35,7 +32,7 @@ class ReservationController extends Controller
         $response = $this->service->ReservationProcess($request->all());
 
         return $response['success'] ?
-            redirect()->route('home')->with('success', $response['message'])
+            redirect()->route('base')->with('success', $response['message'])
             : redirect()->back()->with('error', $response['message']);
     }
     public function dashboardReservation(){
@@ -45,6 +42,21 @@ class ReservationController extends Controller
             view('/Dashboard/reservation')->with('reservations',$reservations)
             : view('/Dashboard/reservation')->with('error', $response['message']);
     }
+
+    /**
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function confirmReservation($id): RedirectResponse
+    {
+        $response = $this->service->confirmReservation($id);
+
+
+        return $response['success'] ?
+            redirect()->route('dashboard.reservation')->with('success', $response['message'])
+            : redirect()->back()->with('error', $response['message']);
+    }
+
     public function deleteReservation($id): RedirectResponse
     {
         $response = $this->service->deleteReservation($id);

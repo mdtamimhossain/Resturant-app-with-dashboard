@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('guestNumber');
             $table->string('date');
             $table->string('message');
-
+            $table->boolean('confirmation')->default(false);
         });
     }
 

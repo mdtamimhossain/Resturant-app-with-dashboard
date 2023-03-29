@@ -43,6 +43,7 @@ Route::get('/dashboard/reservation',[ReservationController::class,'dashboardRese
 Route::get('/dashboard/user',[DashboardController::class,'dashboardUser'])->name('dashboard.user');
 Route::get('/dashboard/order',[DashboardController::class,'dashboardOrder'])->name('dashboard.order');
 //Route::get('/dashboard/userList',[DashboardController::class,'userList'])->name('dashboard.userList');
+Route::post('/dashboard/reservation/confirmation/{id}', [ReservationController::class,'confirmReservation'])->name('dashboard.confirmReservation');
 Route::post('/dashboard/reservation/delete/{id}', [ReservationController::class, 'deleteReservation'])->name('dashboard.deleteReservation');
 Route::post('/dashboard/order/delete/{id}', [FoodController::class, 'deleteOrder'])->name('dashboard.deleteOrder');
 
